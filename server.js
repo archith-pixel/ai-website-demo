@@ -13,15 +13,16 @@ const targetFile = 'index.html';
 
 // Configure Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+
+// Get the model, matching the one from your example
+const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' }); // <-- UPDATED MODEL
 
 // --- Middleware ---
-// Serve static files (admin.html, index.html)
-app.use(express.static(__dirname));
 // Parse JSON bodies from requests
 app.use(express.json());
 
 // --- Routes ---
+// *** NOTE: We define our specific routes FIRST ***
 
 // Serve the admin panel
 app.get('/', (req, res) => {
@@ -65,7 +66,7 @@ Respond with **ONLY** the raw HTML code. Do not include \`\`\`html, markdown, or
 
         // --- Step 3: Call the AI ---
         console.log('Sending prompt to AI...');
-        const result = await model.generateContent(aiPrompt);
+        const result = await model.generateContent(aiPrompt); // This is the correct Node.js method
         const response = result.response;
         const newHtmlContent = response.text();
         console.log('AI generated new HTML.');
@@ -110,6 +111,10 @@ Respond with **ONLY** the raw HTML code. Do not include \`\`\`html, markdown, or
         res.status(500).json({ error: 'Server error', details: err.message });
     }
 });
+
+// --- Serve static files *after* all other routes ---
+// This line is now *after* our app.get('/') route, so it won't override it.
+app.use(express.static(__dirname));
 
 // --- Start Server ---
 app.listen(port, () => {
