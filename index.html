@@ -37,7 +37,7 @@
             border-radius: 12px;
             box-shadow: var(--shadow-medium);
             text-align: center;
-            max-width: 700px;
+            max-width: 900px; /* Increased max-width for news section */
             width: 100%;
             border: 1px solid var(--border-color);
             transition: transform 0.3s ease-in-out;
@@ -72,7 +72,7 @@
             margin-bottom: 25px;
             font-size: 1.1em;
             color: var(--light-text-color);
-            max-width: 500px;
+            max-width: 700px; /* Adjusted max-width for main paragraph */
             margin-left: auto;
             margin-right: auto;
         }
@@ -87,67 +87,118 @@
             letter-spacing: 1px;
         }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 25px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+        /* AI News Section Styles */
+        .ai-news-section {
+            margin-top: 40px;
+            text-align: left; /* Align news content to left within its section */
         }
 
-        li {
+        .ai-news-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color); /* Emphasize news section header */
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .news-card {
             background-color: var(--background-color);
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            color: var(--text-color);
-            font-weight: 400;
+            padding: 25px;
+            border-radius: 10px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-light);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            min-width: 120px; /* Ensure some minimum width for list items */
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        li:hover {
-            background-color: var(--accent-color);
-            color: var(--container-bg);
-            transform: translateY(-3px) scale(1.02);
+        .news-card:hover {
+            transform: translateY(-8px);
             box-shadow: var(--shadow-medium);
             border-color: var(--accent-color);
         }
 
+        .news-card h3 {
+            color: var(--text-color);
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .news-card p {
+            font-size: 0.95em;
+            color: var(--light-text-color);
+            margin-bottom: 20px;
+            flex-grow: 1; /* Allow description to take up available space */
+            max-width: none; /* Override the global p max-width */
+            text-align: left; /* Ensure description text is left-aligned */
+        }
+
+        .news-card .read-more {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: flex-start; /* Align link to the start */
+        }
+
+        .news-card .read-more:hover {
+            background-color: #1976D2; /* A slightly darker blue */
+            transform: translateY(-2px);
+        }
+
         /* Responsive adjustments */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
                 border-radius: 8px;
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
 
             h2 {
-                font-size: 1.6em;
+                font-size: 1.8em;
             }
 
             p {
                 font-size: 1em;
             }
 
-            li {
-                padding: 12px 20px;
-                font-size: 1em;
-                min-width: unset; /* Remove min-width on small screens */
-                width: 100%; /* Make list items take full width */
+            .news-grid {
+                grid-template-columns: 1fr; /* Stack cards on small screens */
+                gap: 20px;
             }
 
-            ul {
-                flex-direction: column; /* Stack list items vertically */
-                gap: 10px;
+            .news-card {
+                padding: 20px;
+            }
+
+            .news-card h3 {
+                font-size: 1.2em;
+            }
+
+            .news-card p {
+                font-size: 0.9em;
+            }
+            
+            .news-card .read-more {
+                padding: 8px 15px;
+                font-size: 0.85em;
             }
         }
     </style>
@@ -155,15 +206,43 @@
 <body>
     <div class="container">
         <h1>My AI-Powered Website</h1>
-        <p>This is the initial version of the site, showcasing a clean and modern design with a touch of interactivity.</p>
-        <h2>List of Fruits:</h2>
-        <ul>
-            <li>Apple</li>
-            <li>Banana</li>
-            <li>Orange</li>
-            <li>Grape</li>
-            <li>Strawberry</li>
-        </ul>
+        <p>Stay updated with the latest in Artificial Intelligence. Explore top news and breakthroughs below.</p>
+
+        <section class="ai-news-section">
+            <h2>Top AI News Today</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <h3>Breakthrough in Neural Network Efficiency</h3>
+                    <p>Researchers unveil a new architecture that significantly reduces computational cost for deep learning models, promising faster AI deployment.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>Ethical AI Standards Proposed by Global Consortium</h3>
+                    <p>Leading tech companies and regulatory bodies collaborate to establish universal guidelines for responsible AI development and deployment.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>AI-Powered Drug Discovery Accelerates Cancer Research</h3>
+                    <p>A new AI platform is demonstrating remarkable success in identifying potential drug candidates, drastically speeding up pre-clinical trials.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>Generative AI Revolutionizes Content Creation</h3>
+                    <p>From text to images, advanced generative models are enabling creators to produce high-quality content at unprecedented scales.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>New Dataset Boosts Conversational AI Accuracy</h3>
+                    <p>A massive, diverse dataset released by a non-profit organization is set to improve the natural language understanding of AI assistants.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="news-card">
+                    <h3>Robotics and AI Merge for Advanced Automation</h3>
+                    <p>Next-generation robots, powered by sophisticated AI, are tackling complex tasks in manufacturing, logistics, and healthcare with greater precision.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>
