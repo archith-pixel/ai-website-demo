@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; }
+        textarea { width: 100%; height: 100px; margin-bottom: 1rem; }
+        button { padding: 0.5rem 1rem; }
+        #status { margin-top: 1rem; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>AI Feature Request</h1>
+    <p>Describe the change you want to make to <code>index.html</code>:</p>
+    <textarea id="prompt" placeholder="e.g., 'Add a blue button that says Click Me'"></textarea>
+    <button onclick="requestFeature()">Submit Request</button>
+    <pre id="status"></pre>
+
+    <script>
+        async function requestFeature() {
+            const prompt = document.getElementById('prompt').value;
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = 'Working... Sending request to AI...';
+
+            try {
+                const response = await fetch('/update-feature', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    statusEl.textContent = `Success!\n\n${result.message}\n\n${result.git_output}`;
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (err) {
+                statusEl.textContent = `Error: ${err.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
