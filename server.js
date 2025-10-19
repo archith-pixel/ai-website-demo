@@ -78,12 +78,22 @@ Respond with **ONLY** the raw HTML code. Do not include \`\`\`html, markdown, or
         // --- Step 5: Run Git commands to commit and push ---
         // !! DANGER: This is a major security risk (Command Injection) !!
         // !! It is only for a local-only, trusted demo !!
-        const commitMessage = `feat: AI implemented request - "${prompt}"`;
+       // --- Step 5: Run Git commands to commit and push ---
+        // !! DANGER: This is a major security risk (Command Injection) !!
+        // !! It is only for a local-only, trusted demo !!
+
+        // 1. Create the message content WITHOUT extra quotes
+        const commitMessage = `feat: AI implemented request - ${prompt}`;
+
+        // 2. Sanitize the message by escaping any internal quotes (e.g., " -> \")
+        const sanitizedMessage = commitMessage.replace(/"/g, '\\"');
+        
+        // 3. Build the command string using the SANITIZED message
         const gitCommands = [
             `git config user.email "ai-agent@demo.com"`, // Config for this commit
             `git config user.name "AI Agent"`,
             `git add ${targetFile}`,
-            `git commit -m "${commitMessage}"`,
+            `git commit -m "${sanitizedMessage}"`, // <-- Use the new sanitized variable
             `git push origin main` // Assumes your branch is 'main'
         ].join(' && ');
 
