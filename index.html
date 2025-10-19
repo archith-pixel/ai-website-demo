@@ -3,21 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Site</title>
+    <title>My AI-Powered Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; display: grid; place-items: center; min-height: 100vh; }
-        .container { text-align: center; }
+        :root {
+            --primary-color: #4CAF50; /* A pleasant green */
+            --accent-color: #2196F3; /* A friendly blue */
+            --text-color: #333;
+            --light-text-color: #555;
+            --background-color: #f8f8f8;
+            --container-bg: #ffffff;
+            --border-color: #eee;
+            --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.05);
+            --shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            text-align: center;
+            max-width: 700px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2.8em;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 25px;
+            font-size: 1.1em;
+            color: var(--light-text-color);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-size: 2em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        li {
+            background-color: var(--background-color);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            color: var(--text-color);
+            font-weight: 400;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-width: 120px; /* Ensure some minimum width for list items */
+        }
+
+        li:hover {
+            background-color: var(--accent-color);
+            color: var(--container-bg);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+                border-radius: 8px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            li {
+                padding: 12px 20px;
+                font-size: 1em;
+                min-width: unset; /* Remove min-width on small screens */
+                width: 100%; /* Make list items take full width */
+            }
+
+            ul {
+                flex-direction: column; /* Stack list items vertically */
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>My AI-Powered Website</h1>
-        <p>This is the initial version of the site.</p>
+        <p>This is the initial version of the site, showcasing a clean and modern design with a touch of interactivity.</p>
         <h2>List of Fruits:</h2>
         <ul>
             <li>Apple</li>
             <li>Banana</li>
             <li>Orange</li>
+            <li>Grape</li>
+            <li>Strawberry</li>
         </ul>
     </div>
 </body>
